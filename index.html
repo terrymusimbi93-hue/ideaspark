@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IdeaSpark – Content Ideas</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0f1a;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+      background: #0a1cff;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .idea-box {
+      background: #11162a;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      font-size: 1.1rem;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .buttons button {
+      background: #0a1cff;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      margin: 6px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .buttons button:hover {
+      background: #1e35ff;
+    }
+
+    .next-btn {
+      margin-top: 15px;
+      background: white;
+      color: black;
+      font-weight: bold;
+    }
+
+    .ad-box {
+      margin-top: 30px;
+      padding: 15px;
+      background: #1a1f3a;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>IdeaSpark ✨</header>
+
+<div class="container">
+  <p>Tap a category to get a content idea 👇</p>
+
+  <div class="buttons">
+    <button onclick="setCategory('dance')">Dance</button>
+    <button onclick="setCategory('quotes')">Quotes</button>
+    <button onclick="setCategory('comedy')">Comedy</button>
+    <button onclick="setCategory('motivation')">Motivation</button>
+    <button onclick="setCategory('school')">School Life</button>
+  </div>
+
+  <div class="idea-box" id="ideaBox">
+    Choose a category to see ideas
+  </div>
+
+  <button class="next-btn" onclick="nextIdea()">Next Idea</button>
+
+  <div class="ad-box">
+    🔒 Ad space (Google AdSense goes here later)<br>
+    You earn when people visit your website
+  </div>
+
+  <footer>
+    © 2026 IdeaSpark • Built with ❤️
+  </footer>
+</div>
+
+<script>
+  const ideas = {
+    dance: [
+      "Do a slow-motion intro then drop the beat",
+      "Dance using only hand movements",
+      "Try a trending dance in school uniform",
+      "Teach one dance move step by step",
+      "Dance to an old song with new moves"
+    ],
+    quotes: [
+      "A quote about self-belief with calm music",
+      "Before vs after confidence quote",
+      "Quote that helped you during hard times",
+      "Write a quote on paper and reveal it",
+      "Faith-based encouragement quote"
+    ],
+    comedy: [
+      "Expectation vs reality skit",
+      "Funny school situation acting",
+      "POV: when your alarm fails",
+      "React to something funny without talking",
+      "Funny facial expressions challenge"
+    ],
+    motivation: [
+      "Talk about not giving up",
+      "Motivate someone who failed",
+      "Short talk about trusting the process",
+      "Encourage students feeling discouraged",
+      "One minute mindset reset"
+    ],
+    school: [
+      "Day in the life at school",
+      "School morning routine",
+      "Things only students understand",
+      "What teachers say vs what they mean",
+      "Study tips that actually work"
+    ]
+  };
+
+  let currentCategory = null;
+
+  function setCategory(cat) {
+    currentCategory = cat;
+    nextIdea();
+  }
+
+  function nextIdea() {
+    if (!currentCategory) {
+      document.getElementById("ideaBox").innerText = "Please select a category first 😊";
+      return;
+    }
+    const list = ideas[currentCategory];
+    const random = Math.floor(Math.random() * list.length);
+    document.getElementById("ideaBox").innerText = list[random];
+  }
+</script>
+
+</body>
+</html>
