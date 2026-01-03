@@ -1,135 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>UpNext</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Creator Ideas Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{
-  background:black;
-  color:white;
-  overflow:hidden;
-}
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  height:60px;
-  background:rgba(0,0,0,0.9);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  letter-spacing:1px;
-  z-index:10;
-}
-header span{color:#1e90ff}
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0b0b0b;
+      color: white;
+    }
 
-.feed{
-  margin-top:60px;
-  height:calc(100vh - 60px);
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
-}
+    header {
+      background: linear-gradient(120deg, #000428, #004e92);
+      padding: 40px 20px;
+      text-align: center;
+    }
 
-.video-card{
-  height:100vh;
-  scroll-snap-align:start;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-}
+    header h1 {
+      color: #00bfff;
+      margin: 0;
+    }
 
-video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+    nav {
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px;
+      position: sticky;
+      top: 0;
+    }
 
-.actions{
-  position:absolute;
-  right:15px;
-  bottom:120px;
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-.action{
-  text-align:center;
-  color:white;
-  font-size:14px;
-}
+    nav a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-.bottom-bar{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  height:70px;
-  background:black;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  border-top:1px solid #1e90ff;
-}
-.tab{
-  color:white;
-  opacity:0.7;
-}
-.tab.active{
-  color:#1e90ff;
-  opacity:1;
-}
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 20px;
+    }
 
-.earn{
-  position:fixed;
-  top:70px;
-  left:10px;
-  background:rgba(30,144,255,0.15);
-  border:1px solid #1e90ff;
-  padding:8px 12px;
-  border-radius:20px;
-  font-size:12px;
-}
-</style>
+    .section-title {
+      text-align: center;
+      color: #00bfff;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #111;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #1e1e1e;
+    }
+
+    .card h3 {
+      color: #00bfff;
+      margin-top: 0;
+    }
+
+    .highlight {
+      border: 2px solid #00bfff;
+      box-shadow: 0 0 20px rgba(0,191,255,0.2);
+    }
+
+    footer {
+      background-color: #000;
+      text-align: center;
+      padding: 20px;
+      color: #aaa;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>UpNext <span>•</span> Trending</header>
+<header>
+  <h1>🔥 Creator Content Ideas Hub</h1>
+  <p>Fresh ideas every day for creators</p>
+</header>
 
-<div class="earn">💰 Earn via views • tips • sponsors</div>
+<nav>
+  <a href="#daily">Daily Ideas</a>
+  <a href="#how">How It Works</a>
+  <a href="#money">Monetization</a>
+</nav>
 
-<div class="feed">
+<div class="container">
 
-  <div class="video-card">
-    <video autoplay muted loop src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
-    <div class="actions">
-      <div class="action">❤️<br>1.2k</div>
-      <div class="action">💬<br>230</div>
-      <div class="action">↗️</div>
+  <!-- DAILY IDEAS -->
+  <section id="daily">
+    <h2 class="section-title">📅 Today’s Content Ideas</h2>
+    <div class="grid" id="dailyIdeas"></div>
+  </section>
+
+  <!-- HOW -->
+  <section id="how" style="margin-top:50px;">
+    <h2 class="section-title">⚙️ How It Works</h2>
+    <div class="card">
+      <p>
+        Each day, this platform highlights fresh content ideas to help creators
+        stay consistent and creative on TikTok, Reels, and Shorts.
+      </p>
     </div>
-  </div>
+  </section>
 
-  <div class="video-card">
-    <video autoplay muted loop src="https://www.w3schools.com/html/movie.mp4"></video>
-    <div class="actions">
-      <div class="action">❤️<br>980</div>
-      <div class="action">💬<br>88</div>
-      <div class="action">↗️</div>
+  <!-- MONEY -->
+  <section id="money" style="margin-top:50px;">
+    <h2 class="section-title">💰 How We Earn (Future)</h2>
+    <div class="card">
+      <p>📢 Ads when traffic grows</p>
+      <p>⭐ Premium creator tools</p>
+      <p>🤝 Sponsored challenges</p>
+      <p>🎁 Optional user support</p>
     </div>
-  </div>
+  </section>
 
 </div>
 
-<div class="bottom-bar">
-  <div class="tab active">Trending</div>
-  <div class="tab">Create</div>
-  <div class="tab">Earnings</div>
-  <div class="tab">Profile</div>
-</div>
+<footer>
+  © 2026 • Creator Ideas Hub
+</footer>
+
+<script>
+  const ideas = [
+    "Dance to a slow song but move fast during the chorus",
+    "Recreate your first video vs your latest one",
+    "Start frozen, then explode when the beat drops",
+    "Use text: 'Wait for it 👀' in the first 2 seconds",
+    "Dance outside instead of your usual location",
+    "Switch outfits mid-video using a jump cut",
+    "Copy a trending move and add your own twist",
+    "Use a song everyone forgot about",
+    "Film in black & white, color appears at the beat drop",
+    "Smile first, dance later — confuse the viewer"
+  ];
+
+  const today = new Date().getDate();
+  const dailyContainer = document.getElementById("dailyIdeas");
+
+  for (let i = 0; i < 3; i++) {
+    const ideaIndex = (today + i) % ideas.length;
+
+    const card = document.createElement("div");
+    card.className = "card highlight";
+    card.innerHTML = `
+      <h3>🔥 Daily Idea</h3>
+      <p>${ideas[ideaIndex]}</p>
+    `;
+    dailyContainer.appendChild(card);
+  }
+</script>
 
 </body>
-  </html>
+    </html>
