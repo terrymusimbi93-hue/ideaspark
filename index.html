@@ -1,226 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>IdeaSpark™ | Unlock Creator Ideas</title>
+<meta charset="UTF-8">
+<title>IdeaSpark™ | Educational Creator Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!--
-© 2026 IdeaSpark™ by Terry Musimbi
-Unauthorized copying, imitation, or reuse of the IdeaSpark name,
-design, concept, or code is strictly prohibited and may result
-in legal action under applicable intellectual property laws.
--->
+<meta http-equiv="Content-Security-Policy"
+content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';">
 
 <style>
 :root{
-  --blue:#1e90ff;
-  --black:#0b0f1a;
+  --blue:#0a5cff;
+  --black:#0a0a0a;
   --white:#ffffff;
 }
 *{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{
-  margin:0;
-  background:linear-gradient(135deg,var(--black),#111827);
+body{margin:0;background:#f5f7fb;color:var(--black)}
+
+header{
+  background:var(--black);
   color:var(--white);
+  padding:22px;
+  text-align:center;
 }
-.hidden{display:none}
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
+header h1{margin:0;color:var(--blue)}
+header p{margin:5px 0 0}
+
+.container{max-width:1100px;margin:auto;padding:20px}
+
 .card{
-  background:#0f172a;
-  border-radius:14px;
-  padding:20px;
+  background:var(--white);
+  padding:22px;
+  border-radius:12px;
   margin-bottom:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
-h1,h2,h3{color:var(--blue)}
+
 button{
   background:var(--blue);
+  color:#fff;
   border:none;
-  padding:12px 18px;
-  border-radius:10px;
-  color:white;
+  padding:12px 20px;
+  border-radius:8px;
+  font-size:15px;
   cursor:pointer;
-  font-weight:bold;
 }
 button:hover{opacity:.9}
+
 input{
   width:100%;
   padding:12px;
+  margin:10px 0;
   border-radius:8px;
-  border:none;
-  margin-bottom:10px;
+  border:1px solid #ccc;
 }
-footer{
-  text-align:center;
+
+.hidden{display:none}
+
+.badge{
+  display:inline-block;
+  background:var(--blue);
+  color:#fff;
+  padding:6px 14px;
+  border-radius:20px;
   font-size:13px;
-  opacity:.8;
-  margin-top:40px;
+  margin:4px 4px 0 0;
 }
-.lock{
-  text-align:center;
-  padding:60px 20px;
-}
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:15px;
-}
-.stat{
-  background:#020617;
-  border-radius:12px;
-  padding:15px;
-  text-align:center;
-}
-.idea{
-  background:#020617;
-  border-left:4px solid var(--blue);
-  padding:12px;
-  margin-bottom:10px;
+
+.warning{
+  background:#fff1f1;
+  border-left:5px solid red;
+  padding:14px;
   border-radius:8px;
+  color:#900;
 }
-.video{
-  background:#020617;
-  border-radius:12px;
-  padding:15px;
-  margin-bottom:10px;
+
+footer{
+  background:var(--black);
+  color:var(--white);
+  padding:22px;
+  text-align:center;
+  font-size:14px;
 }
-a{color:var(--blue);text-decoration:none}
+footer strong{color:var(--blue)}
 </style>
 </head>
 
-<body oncontextmenu="return false">
+<body>
 
-<!-- LOCK SCREEN -->
-<div id="lockScreen" class="container">
-  <div class="card lock">
-    <h1>IdeaSpark™</h1>
-    <p><b>Unlock powerful educational creator ideas.</b></p>
-    <p>Sign up to access content ideas, educational videos, points & more.</p>
+<header>
+  <h1>IdeaSpark™</h1>
+  <p>Educational Content & Creator Ideas Platform</p>
+  <p><strong>Owner:</strong> TERRY MUSIMBI</p>
+</header>
 
-    <input id="username" placeholder="Choose a username"/>
-    <button onclick="signup()">Sign Up / Login</button>
+<div class="container">
 
-    <p style="margin-top:15px;font-size:13px;opacity:.8">
-      By continuing, you agree to our Terms & Privacy Policy.
-    </p>
-  </div>
+<!-- SIGN UP LOCK -->
+<div id="signupBox" class="card">
+  <h2>🔒 Content Locked</h2>
+  <p>Sign up to access educational ideas, videos, points & rewards.</p>
+  <input id="username" placeholder="Choose a username">
+  <button onclick="signUp()">Sign Up & Continue</button>
 </div>
 
-<!-- MAIN APP -->
-<div id="app" class="container hidden">
+<!-- MAIN DASHBOARD -->
+<div id="dashboard" class="hidden">
 
-  <div class="card">
-    <h2>Welcome to IdeaSpark 🎉</h2>
-    <p>Hello <b id="userName"></b> — created by <b>Terry Musimbi</b></p>
-  </div>
+<div class="card">
+  <h2>Welcome, <span id="user"></span> 👋</h2>
+  <p><strong>Points:</strong> <span id="points">0</span></p>
+  <p><strong>Level:</strong> <span id="level">Starter</span></p>
+  <div id="badges"></div>
+</div>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat">
-      <h3>Your Points</h3>
-      <p id="points">0</p>
-    </div>
-    <div class="stat">
-      <h3>Total Users</h3>
-      <p id="users">1</p>
-    </div>
-    <div class="stat">
-      <h3>Owner Earnings</h3>
-      <p>$<span id="earnings">0.00</span></p>
-    </div>
-  </div>
+<div class="card">
+  <h3>💡 Content Ideas for Creators</h3>
+  <ul>
+    <li>Educational Reels for Students</li>
+    <li>Study Tips & Learning Hacks</li>
+    <li>Daily Knowledge Shorts</li>
+    <li>Skill-Building Tutorials</li>
+    <li>Motivational Education Videos</li>
+  </ul>
+</div>
 
-  <!-- CONTENT IDEAS -->
-  <div class="card">
-    <h2>💡 Content Ideas (Educational)</h2>
+<div class="card">
+  <h3>📹 Educational Videos (With Audio)</h3>
 
-    <div class="idea">Explain a skill you learned this week in 60 seconds</div>
-    <div class="idea">Teach beginners how to start content creation in 2026</div>
-    <div class="idea">Share free tools creators can use today</div>
-    <div class="idea">Explain how algorithms work (simple & educational)</div>
-    <div class="idea">Create a step-by-step tutorial for one useful app</div>
+  <!-- YouTube -->
+  <iframe width="100%" height="315"
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+  allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-    <button onclick="engage(5)">Mark Ideas as Viewed (+5 pts)</button>
-  </div>
+  <!-- TikTok -->
+  <iframe src="https://www.tiktok.com/embed/721933878918"
+  width="100%" height="500" allowfullscreen></iframe>
 
-  <!-- VIDEOS -->
-  <div class="card">
-    <h2>🎓 Educational Videos</h2>
+  <!-- Instagram -->
+  <iframe src="https://www.instagram.com/p/CxK8uZVv8yA/embed"
+  width="100%" height="480" allowfullscreen></iframe>
 
-    <div class="video">
-      <b>Content Creation Basics</b>
-      <p>Learn how creators plan and grow educational content.</p>
-    </div>
+</div>
 
-    <div class="video">
-      <b>AI Tools for Creators</b>
-      <p>Educational overview of AI tools used in 2025–2026.</p>
-    </div>
+<div class="card">
+  <h3>⭐ What Points Do</h3>
+  <ul>
+    <li>Unlock advanced ideas</li>
+    <li>Increase your creator level</li>
+    <li>Earn achievement badges</li>
+    <li>Access future features</li>
+  </ul>
+  <div class="badge">Starter</div>
+  <div class="badge">Creator</div>
+  <div class="badge">Pro Creator</div>
+  <div class="badge">Elite</div>
+</div>
 
-    <button onclick="engage(10)">Watched Videos (+10 pts)</button>
-  </div>
+<div class="card">
+  <h3>📊 Live Visitors</h3>
+  <p>Users on site: <strong><span id="visitors"></span></strong></p>
+</div>
 
-  <!-- REFERRAL -->
-  <div class="card">
-    <h2>🔗 Referral & Engagement</h2>
-    <p>Share IdeaSpark to support the platform.</p>
-    <p><b>Your referral link:</b></p>
-    <code>https://ideaspark.app/?ref=<span id="ref"></span></code>
-  </div>
+<div class="warning">
+⚠️ IdeaSpark™ is protected. Copying the name, design, or system is prohibited
+and may result in takedowns and legal action.
+</div>
 
+</div>
 </div>
 
 <footer>
-  © 2026 <b>IdeaSpark™</b> by Terry Musimbi. All rights reserved.<br/>
-  Unauthorized use, copying, or imitation is prohibited and may result in legal action.
+<p>
+© 2026 <strong>IdeaSpark™</strong>. All Rights Reserved.<br>
+IdeaSpark™ is a proprietary educational platform owned and operated by
+<strong>TERRY MUSIMBI</strong>.
+</p>
+
+<p>
+<strong>Disclaimer:</strong> Points are not real money and cannot be withdrawn.
+</p>
+
+<p>
+Unauthorized copying, cloning, scraping, or imitation is strictly prohibited.
+</p>
 </footer>
 
 <script>
-let user = localStorage.getItem("ideaspark_user");
-let points = Number(localStorage.getItem("ideaspark_points")) || 0;
-let users = Number(localStorage.getItem("ideaspark_users")) || 0;
-let earnings = Number(localStorage.getItem("ideaspark_earnings")) || 0;
+// Anti-copy
+document.addEventListener("contextmenu",e=>e.preventDefault());
+document.addEventListener("copy",e=>{
+  e.preventDefault();
+  alert("Content protected by IdeaSpark™");
+});
 
-function signup(){
-  const name = document.getElementById("username").value.trim();
-  if(!name){alert("Please enter a username");return;}
-  if(!user){
-    users++;
-    earnings += 0.05; // earning per signup (visual)
-    localStorage.setItem("ideaspark_users",users);
-    localStorage.setItem("ideaspark_earnings",earnings);
-  }
-  user = name;
-  localStorage.setItem("ideaspark_user",name);
-  showApp();
+// Visitor counter (safe demo)
+let v = localStorage.getItem("ideaspark_visitors") || 120;
+v++;
+localStorage.setItem("ideaspark_visitors",v);
+document.getElementById("visitors").innerText=v;
+
+// Signup & points
+function signUp(){
+  const u=document.getElementById("username").value.trim();
+  if(!u) return alert("Enter a username");
+  localStorage.setItem("ideaspark_user",u);
+  localStorage.setItem("ideaspark_points",20);
+  loadUser();
 }
 
-function showApp(){
-  document.getElementById("lockScreen").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-  document.getElementById("userName").innerText=user;
-  document.getElementById("points").innerText=points;
-  document.getElementById("users").innerText=users;
-  document.getElementById("earnings").innerText=earnings.toFixed(2);
-  document.getElementById("ref").innerText=user;
-}
+function loadUser(){
+  const u=localStorage.getItem("ideaspark_user");
+  if(!u) return;
+  document.getElementById("signupBox").style.display="none";
+  document.getElementById("dashboard").classList.remove("hidden");
+  document.getElementById("user").innerText=u;
 
-function engage(p){
-  points+=p;
-  earnings+=0.01; // engagement value
-  localStorage.setItem("ideaspark_points",points);
-  localStorage.setItem("ideaspark_earnings",earnings);
-  document.getElementById("points").innerText=points;
-  document.getElementById("earnings").innerText=earnings.toFixed(2);
-}
+  let p=parseInt(localStorage.getItem("ideaspark_points")||0);
+  p+=10; // daily engagement
+  localStorage.setItem("ideaspark_points",p);
+  document.getElementById("points").innerText=p;
 
-if(user){showApp();}
+  let level="Starter";
+  if(p>=200) level="Creator";
+  if(p>=600) level="Pro Creator";
+  if(p>=1500) level="Elite";
+  document.getElementById("level").innerText=level;
+}
+loadUser();
 </script>
 
 </body>
-      </html>
+  </html>
