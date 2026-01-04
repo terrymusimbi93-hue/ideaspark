@@ -1,289 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IdeaSpark • by Terry Musimbi</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IdeaSpark™ | Unlock Creator Ideas</title>
 
-<!-- PWA -->
-<link rel="manifest" href="data:application/json,{
-  &quot;name&quot;:&quot;IdeaSpark&quot;,
-  &quot;short_name&quot;:&quot;IdeaSpark&quot;,
-  &quot;start_url&quot;:&quot;.&quot;,
-  &quot;display&quot;:&quot;standalone&quot;,
-  &quot;background_color&quot;:&quot;#000000&quot;,
-  &quot;theme_color&quot;:&quot;#0a84ff&quot;
-}">
-<meta name="theme-color" content="#0a84ff">
+<!--
+© 2026 IdeaSpark™ by Terry Musimbi
+Unauthorized copying, imitation, or reuse of the IdeaSpark name,
+design, concept, or code is strictly prohibited and may result
+in legal action under applicable intellectual property laws.
+-->
 
 <style>
 :root{
-  --blue:#0a84ff;
-  --black:#000;
-  --white:#fff;
-  --card:#0b0b0b;
+  --blue:#1e90ff;
+  --black:#0b0f1a;
+  --white:#ffffff;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{
   margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto;
-  background:linear-gradient(180deg,#000,#050d1f);
+  background:linear-gradient(135deg,var(--black),#111827);
   color:var(--white);
 }
-header{
-  position:sticky;top:0;z-index:10;
-  background:#000;
-  padding:14px 16px;
-  display:flex;justify-content:space-between;align-items:center;
-  border-bottom:1px solid #111;
+.hidden{display:none}
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
 }
-.logo{font-weight:900;font-size:18px}
-.logo span{color:var(--blue)}
+.card{
+  background:#0f172a;
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+h1,h2,h3{color:var(--blue)}
 button{
   background:var(--blue);
-  border:none;color:#fff;
-  padding:8px 12px;
+  border:none;
+  padding:12px 18px;
   border-radius:10px;
-  font-weight:700;
+  color:white;
   cursor:pointer;
+  font-weight:bold;
 }
-.container{max-width:900px;margin:auto;padding:16px}
-.card{
-  background:var(--card);
-  border:1px solid #111;
-  border-radius:16px;
-  padding:16px;
-  margin-bottom:16px;
-}
-.small{opacity:.7;font-size:13px}
-
+button:hover{opacity:.9}
 input{
   width:100%;
-  padding:10px;
-  margin:6px 0;
-  border-radius:10px;
-  background:#000;
-  border:1px solid #222;
-  color:#fff;
+  padding:12px;
+  border-radius:8px;
+  border:none;
+  margin-bottom:10px;
 }
-
-.profile{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+footer{
+  text-align:center;
+  font-size:13px;
+  opacity:.8;
+  margin-top:40px;
 }
-.badge{
-  padding:6px 10px;
-  border-radius:999px;
-  background:#001a33;
-  border:1px solid #0a84ff55;
-  color:#9cc8ff;
-  font-weight:700;
+.lock{
+  text-align:center;
+  padding:60px 20px;
 }
-
-/* Video feed */
-.feed{
-  height:70vh;
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
-}
-.video{
-  height:70vh;
-  scroll-snap-align:start;
-  display:flex;
-  align-items:flex-end;
-  background:linear-gradient(180deg,#111,#000);
-  border-bottom:1px solid #111;
-}
-.video .info{
-  padding:16px;
-  width:100%;
-  background:linear-gradient(180deg,transparent,rgba(0,0,0,.8));
-}
-.actions{margin-top:8px;display:flex;gap:8px}
-.actions button{
-  background:#000;
-  border:1px solid #222;
-  color:#fff;
-}
-
-/* Ideas */
-.grid{
+.stats{
   display:grid;
-  grid-template-columns:1fr;
-  gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
 }
-@media(min-width:700px){
-  .grid{grid-template-columns:1fr 1fr}
+.stat{
+  background:#020617;
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
 }
 .idea{
-  background:#000;
-  border:1px solid #111;
-  border-radius:12px;
+  background:#020617;
+  border-left:4px solid var(--blue);
   padding:12px;
+  margin-bottom:10px;
+  border-radius:8px;
 }
-footer{text-align:center;opacity:.6;padding:20px}
+.video{
+  background:#020617;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:10px;
+}
+a{color:var(--blue);text-decoration:none}
 </style>
 </head>
 
-<body>
+<body oncontextmenu="return false">
 
-<header>
-  <div class="logo">Idea<span>Spark</span></div>
-  <button onclick="installApp()">Install</button>
-</header>
+<!-- LOCK SCREEN -->
+<div id="lockScreen" class="container">
+  <div class="card lock">
+    <h1>IdeaSpark™</h1>
+    <p><b>Unlock powerful educational creator ideas.</b></p>
+    <p>Sign up to access content ideas, educational videos, points & more.</p>
 
-<div class="container">
+    <input id="username" placeholder="Choose a username"/>
+    <button onclick="signup()">Sign Up / Login</button>
 
-<div class="card">
-  <h2>Welcome to IdeaSpark</h2>
-  <p class="small">Created by <strong>Terry Musimbi</strong>. Discover trending content ideas and earn points daily.</p>
-</div>
-
-<div class="card">
-  <h2>Sign up / Login</h2>
-  <input id="username" placeholder="Enter username">
-  <button onclick="login()">Continue</button>
-</div>
-
-<div class="card" id="profile" style="display:none">
-  <div class="profile">
-    <div class="badge" id="uName"></div>
-    <div class="badge">Points: <span id="points">0</span></div>
-    <div class="badge">Days Active: <span id="days">1</span></div>
+    <p style="margin-top:15px;font-size:13px;opacity:.8">
+      By continuing, you agree to our Terms & Privacy Policy.
+    </p>
   </div>
 </div>
 
-<!-- TRENDING VIDEOS -->
-<div class="card">
-  <h2>Trending Videos (Auto-Generated Daily)</h2>
-  <div class="feed" id="feed"></div>
+<!-- MAIN APP -->
+<div id="app" class="container hidden">
+
+  <div class="card">
+    <h2>Welcome to IdeaSpark 🎉</h2>
+    <p>Hello <b id="userName"></b> — created by <b>Terry Musimbi</b></p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <h3>Your Points</h3>
+      <p id="points">0</p>
+    </div>
+    <div class="stat">
+      <h3>Total Users</h3>
+      <p id="users">1</p>
+    </div>
+    <div class="stat">
+      <h3>Owner Earnings</h3>
+      <p>$<span id="earnings">0.00</span></p>
+    </div>
+  </div>
+
+  <!-- CONTENT IDEAS -->
+  <div class="card">
+    <h2>💡 Content Ideas (Educational)</h2>
+
+    <div class="idea">Explain a skill you learned this week in 60 seconds</div>
+    <div class="idea">Teach beginners how to start content creation in 2026</div>
+    <div class="idea">Share free tools creators can use today</div>
+    <div class="idea">Explain how algorithms work (simple & educational)</div>
+    <div class="idea">Create a step-by-step tutorial for one useful app</div>
+
+    <button onclick="engage(5)">Mark Ideas as Viewed (+5 pts)</button>
+  </div>
+
+  <!-- VIDEOS -->
+  <div class="card">
+    <h2>🎓 Educational Videos</h2>
+
+    <div class="video">
+      <b>Content Creation Basics</b>
+      <p>Learn how creators plan and grow educational content.</p>
+    </div>
+
+    <div class="video">
+      <b>AI Tools for Creators</b>
+      <p>Educational overview of AI tools used in 2025–2026.</p>
+    </div>
+
+    <button onclick="engage(10)">Watched Videos (+10 pts)</button>
+  </div>
+
+  <!-- REFERRAL -->
+  <div class="card">
+    <h2>🔗 Referral & Engagement</h2>
+    <p>Share IdeaSpark to support the platform.</p>
+    <p><b>Your referral link:</b></p>
+    <code>https://ideaspark.app/?ref=<span id="ref"></span></code>
+  </div>
+
 </div>
 
-<!-- CONTENT CREATOR IDEAS -->
-<div class="card">
-  <h2>Content Ideas for Creators (200+)</h2>
-  <div class="grid" id="ideas"></div>
-</div>
-
-<div class="card">
-  <h2>Earnings</h2>
-  <p class="small">
-    • Users earn points by using the website<br>
-    • You earn more as traffic & engagement increase<br>
-    • Ads & affiliates are AdSense-ready (Coming Soon)
-  </p>
-</div>
-
-<div class="card">
-  <h2>Privacy & Terms</h2>
-  <p class="small">
-    No sensitive data is sold. Points are stored locally. Safe for all ages.
-  </p>
-</div>
-
-</div>
-
-<footer>© <span id="year"></span> IdeaSpark • Terry Musimbi</footer>
+<footer>
+  © 2026 <b>IdeaSpark™</b> by Terry Musimbi. All rights reserved.<br/>
+  Unauthorized use, copying, or imitation is prohibited and may result in legal action.
+</footer>
 
 <script>
-/* STORAGE */
-const S = (k,v)=>v===undefined?JSON.parse(localStorage.getItem(k)):localStorage.setItem(k,JSON.stringify(v));
-let user=S("user")||null;
-let points=S("points")||0;
-let days=S("days")||1;
+let user = localStorage.getItem("ideaspark_user");
+let points = Number(localStorage.getItem("ideaspark_points")) || 0;
+let users = Number(localStorage.getItem("ideaspark_users")) || 0;
+let earnings = Number(localStorage.getItem("ideaspark_earnings")) || 0;
 
-/* LOGIN */
-function login(){
-  const name=document.getElementById("username").value||"User";
-  user={name};
-  S("user",user);
-  addPoints(20);
-  showProfile();
+function signup(){
+  const name = document.getElementById("username").value.trim();
+  if(!name){alert("Please enter a username");return;}
+  if(!user){
+    users++;
+    earnings += 0.05; // earning per signup (visual)
+    localStorage.setItem("ideaspark_users",users);
+    localStorage.setItem("ideaspark_earnings",earnings);
+  }
+  user = name;
+  localStorage.setItem("ideaspark_user",name);
+  showApp();
 }
 
-/* PROFILE */
-function showProfile(){
-  if(!user)return;
-  document.getElementById("profile").style.display="block";
-  document.getElementById("uName").textContent=user.name;
-  document.getElementById("points").textContent=points;
-  document.getElementById("days").textContent=days;
+function showApp(){
+  document.getElementById("lockScreen").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+  document.getElementById("userName").innerText=user;
+  document.getElementById("points").innerText=points;
+  document.getElementById("users").innerText=users;
+  document.getElementById("earnings").innerText=earnings.toFixed(2);
+  document.getElementById("ref").innerText=user;
 }
 
-/* POINTS */
-function addPoints(n){
-  points+=n;
-  S("points",points);
-  document.getElementById("points").textContent=points;
+function engage(p){
+  points+=p;
+  earnings+=0.01; // engagement value
+  localStorage.setItem("ideaspark_points",points);
+  localStorage.setItem("ideaspark_earnings",earnings);
+  document.getElementById("points").innerText=points;
+  document.getElementById("earnings").innerText=earnings.toFixed(2);
 }
 
-/* DAILY TRENDING VIDEOS (2025–2026 STYLE) */
-const videoHooks=[
-  "This changed everything",
-  "Nobody is talking about this",
-  "Do this before 2026",
-  "Creators are switching to this",
-  "This trend is exploding",
-  "Stop scrolling",
-  "This works every time"
-];
-const niches=["AI","Motivation","Faceless Content","Shorts","Reels","Education","Business"];
-
-const feed=document.getElementById("feed");
-const seed=new Date().toDateString().length;
-
-for(let i=0;i<8;i++){
-  const v=document.createElement("div");
-  v.className="video";
-  const title=`${videoHooks[(seed+i)%videoHooks.length]} • ${niches[(seed*i)%niches.length]}`;
-  v.innerHTML=`
-    <div class="info">
-      <strong>${title}</strong>
-      <div class="actions">
-        <button onclick="addPoints(5)">Like +5</button>
-        <button onclick="addPoints(3)">Save +3</button>
-      </div>
-    </div>`;
-  v.addEventListener("wheel",()=>addPoints(1));
-  feed.appendChild(v);
-}
-
-/* 200+ CREATOR IDEAS AUTO-GENERATED */
-const platforms=["TikTok","YouTube","Instagram","Faceless","AI"];
-const formats=[
-  "Daily tips","Before vs After","Mistakes beginners make",
-  "Top 5 tools","Storytime","POV","Myth vs Truth",
-  "Challenges","Explainers","Facts","Motivation","Tutorials"
-];
-
-const ideas=document.getElementById("ideas");
-platforms.forEach(p=>{
-  formats.forEach(f=>{
-    const d=document.createElement("div");
-    d.className="idea";
-    d.innerHTML=`
-      <strong>${p} • ${f}</strong>
-      <p class="small">Optimized for 2025–2026 trends</p>
-      <button onclick="addPoints(4)">Save idea +4</button>`;
-    ideas.appendChild(d);
-  });
-});
-
-/* INSTALL */
-let deferredPrompt;
-window.addEventListener("beforeinstallprompt",e=>{
-  e.preventDefault();
-  deferredPrompt=e;
-});
-function installApp(){
-  if(deferredPrompt)deferredPrompt.prompt();
-  else alert("Use browser → Add to Home Screen");
-}
-
-document.getElementById("year").textContent=new Date().getFullYear();
-showProfile();
+if(user){showApp();}
 </script>
 
 </body>
-                                    </html>
+      </html>
