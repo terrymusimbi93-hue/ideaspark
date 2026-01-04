@@ -1,55 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IdeaSpark</title>
+  <meta charset="UTF-8">
+  <title>IdeaSpark ✨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(180deg,#060c1f,#000);
-  color:white;
-  text-align:center;
-}
-header{
-  background:#0a3cff;
-  padding:18px;
-  font-size:26px;
-  font-weight:bold;
-}
-.container{
-  padding:20px;
-}
-button{
-  background:#0a3cff;
-  color:white;
-  border:none;
-  padding:12px 20px;
-  margin:8px;
-  border-radius:12px;
-  font-size:16px;
-  cursor:pointer;
-}
-button:hover{opacity:0.85;}
-.card{
-  background:#0e1638;
-  border-radius:18px;
-  padding:20px;
-  margin:20px auto;
-  max-width:420px;
-}
-.small{
-  font-size:13px;
-  opacity:0.8;
-}
-.footer{
-  margin-top:30px;
-  font-size:12px;
-  opacity:0.7;
-}
-</style>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #020617, #020617);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      background: #0b3cff;
+      padding: 20px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .card {
+      background: #0f172a;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+
+    button {
+      background: #0b3cff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      margin: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    #ideaBox {
+      font-size: 18px;
+      margin-top: 15px;
+    }
+
+    input {
+      width: 90%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      font-size: 14px;
+      opacity: 0.7;
+      padding: 20px;
+    }
+  </style>
 </head>
 
 <body>
@@ -58,107 +77,112 @@ button:hover{opacity:0.85;}
 
 <div class="container">
 
-<p>Stuck on what to post? Get instant content ideas 👇</p>
+  <div class="card">
+    <h3>Stuck on what to post? 👇</h3>
 
-<div>
-  <button onclick="getIdea('dance')">Dance</button>
-  <button onclick="getIdea('comedy')">Comedy</button>
-  <button onclick="getIdea('quotes')">Quotes</button>
-  <button onclick="getIdea('school')">School Life</button>
-  <button onclick="getIdea('motivation')">Motivation</button>
+    <button onclick="getIdea('dance')">Dance</button>
+    <button onclick="getIdea('comedy')">Comedy</button>
+    <button onclick="getIdea('quotes')">Quotes</button>
+    <button onclick="getIdea('school')">School Life</button>
+    <button onclick="getIdea('motivation')">Motivation</button>
+
+    <div id="ideaBox">Choose a category to get ideas</div>
+
+    <br>
+    <button onclick="randomIdea()">Next Idea</button>
+  </div>
+
+  <div class="card">
+    <h3>Get More Ideas 🔥</h3>
+    <p>Sign up to receive exclusive content ideas & updates</p>
+
+    <input type="email" placeholder="Enter your email">
+    <br>
+    <button onclick="signup()">Sign Up (FREE)</button>
+    <p style="font-size:13px;">No spam · No passwords · Free forever</p>
+  </div>
+
+  <div class="card">
+    <h3>How This Earns 💰</h3>
+    <p>
+      IdeaSpark is building a real audience.<br><br>
+      • More visitors = more value<br>
+      • Ads & sponsors can be added later (with parent help)<br>
+      • Paid features can unlock in future<br><br>
+      Starting early = winning later 🚀
+    </p>
+  </div>
+
+  <div class="card">
+    👀 Visitors: <span id="visits">0</span>
+  </div>
+
 </div>
 
-<div class="card" id="ideaBox">
-  Choose a category to get ideas
-</div>
-
-<button onclick="nextIdea()">Next Idea</button>
-
-<!-- SIGN UP -->
-<div class="card">
-  <h3>Get More Ideas 🔥</h3>
-  <p>Sign up to receive exclusive content ideas & updates</p>
-  <a href="PASTE_YOUR_GOOGLE_FORM_LINK_HERE" target="_blank">
-    <button>Sign Up (FREE)</button>
-  </a>
-  <p class="small">No spam · No passwords · Free forever</p>
-</div>
-
-<!-- EARNING INFO -->
-<div class="card">
-  <h3>How This Earns 💰</h3>
-  <p class="small">
-    IdeaSpark is growing a real audience.<br><br>
-    When traffic grows:
-    • Brands become interested<br>
-    • Ads can be added (18+)<br>
-    • Paid features can be unlocked later<br><br>
-    Starting early = winning later 🚀
-  </p>
-</div>
-
-<!-- VISITOR COUNTER -->
-<div style="margin-top:20px;font-size:14px;">
-  👀 Visitors:
-  <img src="https://visitorbadge.io/api/visitors?path=ideaspark" alt="Visitors">
-</div>
-
-<div class="footer">
+<footer>
   © 2026 IdeaSpark · Built with ❤️
-</div>
-
-</div>
+</footer>
 
 <script>
-let ideas={
-dance:[
-"Simple footwork challenge",
-"Before vs After dance",
-"Slow motion dance move",
-"Dance with school uniform",
-"Mirror dance challenge"
-],
-comedy:[
-"Teacher vs student skit",
-"Expectation vs reality",
-"Funny school moment",
-"Relatable student life joke"
-],
-quotes:[
-"Short success quote with calm music",
-"Discipline quote",
-"Consistency quote for creators"
-],
-school:[
-"Day in school life",
-"Study routine",
-"School rules comedy",
-"Packing my school bag"
-],
-motivation:[
-"Don’t give up message",
-"Hard work pays clip",
-"Morning motivation video"
-]
-};
+  const ideas = {
+    dance: [
+      "Dance to a song everyone forgot about",
+      "Teach one simple dance move",
+      "Dance with a friend challenge"
+    ],
+    comedy: [
+      "Act like your phone battery at 1%",
+      "School teachers in real life 😂",
+      "When WiFi disappears"
+    ],
+    quotes: [
+      "One quote that changed your mindset",
+      "Write a quote for students",
+      "Motivation for hard days"
+    ],
+    school: [
+      "Things only students understand",
+      "School lunch review",
+      "Exam week be like 😭"
+    ],
+    motivation: [
+      "Why you should not give up",
+      "Your future self is watching",
+      "Start even if you're scared"
+    ]
+  };
 
-let currentIdeas=[];
+  let lastCategory = null;
 
-function getIdea(type){
-  currentIdeas = ideas[type];
-  document.getElementById("ideaBox").innerText =
-    currentIdeas[Math.floor(Math.random()*currentIdeas.length)];
-}
-
-function nextIdea(){
-  if(currentIdeas.length===0){
-    alert("Choose a category first");
-    return;
+  function getIdea(category) {
+    lastCategory = category;
+    const list = ideas[category];
+    const idea = list[Math.floor(Math.random() * list.length)];
+    document.getElementById("ideaBox").innerText = idea;
   }
-  document.getElementById("ideaBox").innerText =
-    currentIdeas[Math.floor(Math.random()*currentIdeas.length)];
-}
+
+  function randomIdea() {
+    if (!lastCategory) {
+      document.getElementById("ideaBox").innerText = "Pick a category first 👆";
+      return;
+    }
+    getIdea(lastCategory);
+  }
+
+  function signup() {
+    alert("Thanks for signing up! 🚀");
+  }
+
+  // Visitor counter (local, safe)
+  let visits = localStorage.getItem("ideaspark_visits");
+  if (!visits) {
+    visits = 1;
+  } else {
+    visits = Number(visits) + 1;
+  }
+  localStorage.setItem("ideaspark_visits", visits);
+  document.getElementById("visits").innerText = visits;
 </script>
 
 </body>
-    </html>
+  </html>
