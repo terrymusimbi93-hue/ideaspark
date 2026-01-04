@@ -2,247 +2,199 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>TERRY MUSIMBI • Viral Creator Website</title>
+<title>Creator Growth Hub • Terry Musimbi</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description" content="Viral videos, content ideas, and legal earning. Owned by TERRY MUSIMBI.">
+<meta name="description" content="Creator Growth Hub by Terry Musimbi. Viral content ideas, inspiration videos, and legal monetization.">
 <meta name="theme-color" content="#0a58ff">
-
-<!-- AdSense placeholder (add after approval with guardian help) -->
-<!--
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX"
-crossorigin="anonymous"></script>
--->
 
 <style>
 :root{
   --blue:#0a58ff;
-  --black:#000;
-  --white:#fff;
-  --bg:#000;
-  --card:rgba(255,255,255,.08);
+  --bg:#0b1020;
+  --card:#141a33;
+  --text:#ffffff;
+  --muted:#b5c0ff;
 }
-.light{
-  --bg:#f4f7ff;
-  --card:#fff;
-  --black:#fff;
-  --white:#000;
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{
+  background:linear-gradient(180deg,#070b18,#0b1020);
+  color:var(--text);
 }
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
-body{background:var(--bg);color:var(--white);transition:.3s}
-
-/* NAV */
-nav{
-  position:fixed;top:0;width:100%;z-index:50;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 18px;
-  background:rgba(0,0,0,.6);
-  backdrop-filter:blur(14px);
-}
-nav h1{color:var(--blue);font-size:16px}
-nav button{
-  background:var(--blue);border:none;color:#fff;
-  padding:6px 12px;border-radius:20px;cursor:pointer;font-size:12px
-}
-
-/* HERO */
-.hero{
-  padding:100px 20px 40px;
-  text-align:center;
-}
-.hero h2{font-size:28px;margin-bottom:10px}
-.hero p{opacity:.8}
-
-/* CARDS */
-section{padding:30px 20px}
+.container{max-width:900px;margin:auto;padding:20px}
 .card{
   background:var(--card);
-  border-radius:18px;
+  border-radius:20px;
   padding:22px;
   margin-bottom:20px;
-  backdrop-filter:blur(14px);
+  box-shadow:0 10px 30px rgba(0,0,0,.4)
 }
-.card h3{color:var(--blue);margin-bottom:10px}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:16px;
-}
-
-/* BUTTON */
-.btn{
+h1,h2,h3{margin-bottom:10px}
+h1 span{color:var(--blue)}
+p{opacity:.85;font-size:15px}
+button{
   background:var(--blue);
-  color:#fff;
   border:none;
-  padding:12px 18px;
-  border-radius:12px;
-  cursor:pointer;
+  color:#fff;
+  padding:14px;
+  width:100%;
+  border-radius:14px;
+  font-size:15px;
   font-weight:600;
 }
+input{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  background:#0a1030;
+  color:#fff;
+  margin-bottom:12px;
+}
+ul{padding-left:18px}
+li{margin-bottom:8px;font-size:14px}
+small{opacity:.6}
 
-/* VIDEO FEED */
-.feed{
+.viral-feed{
   height:80vh;
   overflow-y:auto;
   scroll-snap-type:y mandatory;
+  border-radius:18px;
 }
-.video{
-  height:80vh;
-  scroll-snap-align:start;
-}
-.video iframe{
+.viral-feed iframe{
   width:100%;
-  height:100%;
+  height:80vh;
   border:none;
-  border-radius:16px;
+  scroll-snap-align:start;
+  border-radius:18px;
 }
 
-/* FOOTER */
 footer{
   text-align:center;
-  padding:30px 20px;
+  padding:30px 10px;
+  opacity:.6;
   font-size:13px;
-  opacity:.7;
-  border-top:1px solid rgba(255,255,255,.1);
-}
-
-/* COUNTER */
-.counter{
-  font-size:22px;
-  color:var(--blue);
-  font-weight:700;
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <h1>TERRY MUSIMBI</h1>
-  <button onclick="toggleMode()">Dark / Light</button>
-</nav>
+<div class="container">
 
-<div class="hero">
-  <h2>Viral Content • Smart Ideas • Legal Earnings</h2>
-  <p>Modern creator website built to grow & monetize safely</p>
-</div>
-
-<section>
+  <!-- HERO -->
   <div class="card">
-    <h3>📊 Visitors</h3>
-    <p class="counter" id="visits">0</p>
-    <p style="opacity:.7;font-size:13px">Demo counter (real analytics added later)</p>
+    <h1>🚀 Creator <span>Growth Hub</span></h1>
+    <p>Smart content ideas • Real inspiration • Legal earning methods</p>
+    <p style="margin-top:8px;font-size:13px;opacity:.6">
+      Built & owned by <b>TERRY MUSIMBI</b>
+    </p>
   </div>
-</section>
 
-<section>
+  <!-- VIRAL FEED -->
   <div class="card">
-    <h3>🎥 Viral Videos</h3>
-    <div class="feed">
-      <div class="video">
-        <iframe src="https://www.youtube.com/embed/9bZkp7q19f0?mute=1"></iframe>
-      </div>
-      <div class="video">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?mute=1"></iframe>
-      </div>
+    <h2>🔥 Trending Creator Videos</h2>
+    <p style="font-size:13px">Scroll vertically for modern inspiration</p>
+
+    <div class="viral-feed">
+      <iframe src="https://www.youtube.com/embed/ZXsQAXx_ao0?mute=1&controls=0"></iframe>
+      <iframe src="https://www.youtube.com/embed/3nQNiWdeH2Q?mute=1&controls=0"></iframe>
+      <iframe src="https://www.youtube.com/embed/l9nh1l8ZIJQ?mute=1&controls=0"></iframe>
     </div>
-  </div>
-</section>
 
-<section>
-  <div class="card">
-    <h3>💡 Viral Content Ideas</h3>
-    <div class="grid">
-      <div>
-        <b>TikTok / Reels</b>
-        <ul>
-          <li>Nobody tells you this…</li>
-          <li>Fast facts</li>
-          <li>Before vs After</li>
-          <li>Text story hooks</li>
-        </ul>
-      </div>
-      <div>
-        <b>YouTube Shorts</b>
-        <ul>
-          <li>AI tools demo</li>
-          <li>Top 3 lists</li>
-          <li>Life hacks</li>
-          <li>Motivation clips</li>
-        </ul>
-      </div>
-      <div>
-        <b>Instagram</b>
-        <ul>
-          <li>Carousel tips</li>
-          <li>Quote reels</li>
-          <li>Behind the scenes</li>
-          <li>Mini tutorials</li>
-        </ul>
-      </div>
-    </div>
+    <small>Embedded public videos • 100% legal</small>
   </div>
-</section>
 
-<section>
+  <!-- CONTENT IDEAS -->
   <div class="card">
-    <h3>🤖 AI Idea Generator</h3>
-    <p id="idea">Click to generate a viral idea</p>
-    <br>
-    <button class="btn" onclick="generateIdea()">Generate Idea</button>
-  </div>
-</section>
+    <h2>💡 Viral Content Ideas</h2>
 
-<section>
-  <div class="card">
-    <h3>💵 How Money Works</h3>
+    <h3>TikTok / Reels</h3>
     <ul>
-      <li><b>TERRY MUSIMBI earns more:</b> AdSense & affiliates</li>
-      <li><b>Users earn less:</b> points & rewards</li>
-      <li>No guaranteed income</li>
+      <li>POV story with text</li>
+      <li>Before vs after clip</li>
+      <li>React to a comment</li>
+      <li>Day in my life</li>
+      <li>Teach one quick tip</li>
+    </ul>
+
+    <h3>YouTube Shorts</h3>
+    <ul>
+      <li>Top 3 tools creators use</li>
+      <li>Mistakes beginners make</li>
+      <li>Quick tutorials</li>
+      <li>Motivational clips</li>
+    </ul>
+
+    <h3>Advanced Viral Hooks</h3>
+    <ul>
+      <li>“Nobody tells you this…”</li>
+      <li>“Stop scrolling if you’re a creator”</li>
+      <li>“I wish I knew this earlier”</li>
+      <li>“This mistake kills your views”</li>
     </ul>
   </div>
-</section>
 
-<section>
+  <!-- HOW YOU EARN -->
   <div class="card">
-    <h3>📜 Legal</h3>
-    <p><b>Privacy Policy:</b> We respect user data.</p>
-    <p><b>Terms:</b> Use responsibly.</p>
-    <p><b>Disclaimer:</b> Earnings not guaranteed.</p>
+    <h2>💵 How This Website Earns</h2>
+    <ul>
+      <li><b>Platform owner:</b> Ads & affiliate tools</li>
+      <li><b>Users:</b> Free ideas & inspiration</li>
+      <li>No cash payouts to users</li>
+      <li>No bots • No fake views</li>
+    </ul>
+    <p style="font-size:13px;opacity:.7">
+      Earnings belong to the platform owner: <b>TERRY MUSIMBI</b>
+    </p>
   </div>
-</section>
 
-<footer>
-  © 2026 • TERRY MUSIMBI • Blue • White • Black
-</footer>
+  <!-- TOOLS -->
+  <div class="card">
+    <h2>🛠️ Recommended Creator Tools</h2>
+    <ul>
+      <li>Video editing apps</li>
+      <li>Caption & hashtag tools</li>
+      <li>Content planners</li>
+      <li>Thumbnail & design tools</li>
+    </ul>
+    <small>Affiliate links can be added later.</small>
+  </div>
 
-<script>
-/* Dark / Light */
-function toggleMode(){
-  document.body.classList.toggle("light");
-}
+  <!-- EARLY ACCESS -->
+  <div class="card">
+    <h2>🔐 Early Access</h2>
+    <p>Accounts unlock more ideas and future features.</p>
 
-/* Visitor Counter (demo) */
-let visits = localStorage.getItem("visits") || 0;
-visits++;
-localStorage.setItem("visits", visits);
-document.getElementById("visits").innerText = visits;
+    <input type="text" placeholder="Username (demo)">
+    <input type="email" placeholder="Email (demo)">
+    <button>Early Access (Coming Soon)</button>
 
-/* AI Idea Generator */
-const ideas = [
-  "Start with: Nobody tells you this about…",
-  "Before vs After transformation",
-  "3 mistakes beginners make",
-  "One tool that changed everything",
-  "Do this for 7 days and see results",
-  "The fastest way to grow in 2026"
-];
-function generateIdea(){
-  document.getElementById("idea").innerText =
-    ideas[Math.floor(Math.random()*ideas.length)];
-}
-</script>
+    <small>This is a demo. No real accounts yet.</small>
+  </div>
+
+  <!-- PRIVACY -->
+  <div class="card">
+    <h2>🔒 Privacy Policy</h2>
+    <p>
+      We respect your privacy. No personal data is sold.
+      Analytics and ads may be used to improve the platform.
+    </p>
+  </div>
+
+  <!-- TERMS -->
+  <div class="card">
+    <h2>📜 Terms of Use</h2>
+    <p>
+      This website provides educational content only.
+      Users must follow all platform rules when creating content.
+    </p>
+  </div>
+
+  <footer>
+    © 2026 • Creator Growth Hub • TERRY MUSIMBI
+  </footer>
+
+</div>
 
 </body>
-  </html>
+                                   </html>
