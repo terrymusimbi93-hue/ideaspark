@@ -21,19 +21,20 @@ header{
 }
 nav{
   display:flex;
+  flex-wrap:wrap;
   justify-content:center;
-  gap:10px;
+  gap:8px;
   margin:10px;
 }
 button{
   background:#0d6efd;
   border:none;
-  padding:10px 15px;
+  padding:10px 14px;
   color:white;
   border-radius:6px;
   cursor:pointer;
 }
-button:hover{opacity:.8}
+button:hover{opacity:.85}
 section{display:none;padding:15px}
 .active{display:block}
 .card{
@@ -49,14 +50,15 @@ input{
   border-radius:5px;
   border:none;
 }
-a{color:#0d6efd}
 .hidden{display:none}
+a{color:#0d6efd;text-decoration:none}
+.trending{border-left:4px solid #0d6efd}
 </style>
 </head>
 
 <body>
 
-<header>IdeaVault – 200+ Ideas Per Category</header>
+<header>IdeaVault – 200+ Trending Ideas Daily</header>
 
 <nav>
   <button onclick="show('home')">Ideas</button>
@@ -68,22 +70,23 @@ a{color:#0d6efd}
 
 <!-- IDEAS -->
 <section id="home">
-  <h3>Content Ideas</h3>
+  <h3>🔥 Trending Content Ideas</h3>
+
   <div id="lockedMsg" class="card">
-    🔒 Please login to unlock all ideas
+    🔒 Login to unlock all ideas
   </div>
 
   <div id="ideas" class="hidden">
-    <h4>🔥 TikTok</h4><div id="tiktok"></div>
-    <h4>📸 Instagram</h4><div id="instagram"></div>
-    <h4>🎥 YouTube</h4><div id="youtube"></div>
-    <h4>💰 Business</h4><div id="business"></div>
+    <h4>TikTok</h4><div id="tiktok"></div>
+    <h4>Instagram</h4><div id="instagram"></div>
+    <h4>YouTube</h4><div id="youtube"></div>
+    <h4>Business</h4><div id="business"></div>
 
     <div class="card">
-      🔗 Recommended Tool:
+      🔗 Recommended Tool  
       <br>
       <a href="https://your-affiliate-link.com" target="_blank">
-        Creator Tools (Earns You)
+        Best Creator Tools (Earns You Money)
       </a>
     </div>
   </div>
@@ -108,15 +111,15 @@ a{color:#0d6efd}
 
 <!-- AFFILIATE -->
 <section id="affiliate">
-  <h3>Affiliate Sign Up</h3>
+  <h3>Affiliate Program</h3>
   <input placeholder="Full Name">
   <input placeholder="Email">
   <input placeholder="Payment Method">
-  <button onclick="alert('Affiliate request sent!')">Join</button>
+  <button onclick="alert('Affiliate request sent!')">Join Affiliate</button>
 
   <div class="card">
-    💸 Earn by sharing your link<br>
-    📈 Commission per click
+    💰 Earn commission by sharing your link  
+    📈 Paid per click or signup
   </div>
 </section>
 
@@ -126,10 +129,11 @@ function show(id){
   document.getElementById(id).classList.add("active");
 }
 
+/* LOGIN SYSTEM */
 function signup(){
   localStorage.setItem("user", suUser.value);
   localStorage.setItem("pass", suPass.value);
-  alert("Account created! Now login");
+  alert("Account created. Please login.");
   show("login");
 }
 
@@ -137,10 +141,9 @@ function login(){
   if(liUser.value===localStorage.user && liPass.value===localStorage.pass){
     localStorage.setItem("logged","yes");
     unlock();
-    alert("Login successful!");
     show("home");
   } else {
-    alert("Wrong details");
+    alert("Wrong login details");
   }
 }
 
@@ -156,19 +159,43 @@ function unlock(){
 
 if(localStorage.logged==="yes"){unlock();}
 
-function generate(container,title){
-  for(let i=1;i<=200;i++){
-    let d=document.createElement("div");
-    d.className="card";
-    d.innerText=title+" Idea #"+i;
-    document.getElementById(container).appendChild(d);
+/* TRENDING IDEA SYSTEM */
+const seed = new Date().toDateString().split("").reduce((a,b)=>a+b.charCodeAt(0),0);
+
+function shuffle(arr){
+  let s=seed;
+  for(let i=arr.length-1;i>0;i--){
+    s=(s*9301+49297)%233280;
+    let j=s%(i+1);
+    [arr[i],arr[j]]=[arr[j],arr[i]];
   }
+  return arr;
 }
 
-generate("tiktok","TikTok");
-generate("instagram","Instagram");
-generate("youtube","YouTube");
-generate("business","Business");
+function generate(title){
+  let arr=[];
+  for(let i=1;i<=200;i++){
+    arr.push(title+" Idea #"+i);
+  }
+  return shuffle(arr);
+}
+
+function render(id,ideas){
+  let d=document.getElementById(id);
+  ideas.forEach((t,i)=>{
+    let c=document.createElement("div");
+    c.className="card"+(i<5?" trending":"");
+    c.innerHTML=i<5?"🔥 <b>TRENDING:</b> "+t:t;
+    d.appendChild(c);
+  });
+}
+
+render("tiktok",generate("TikTok"));
+render("instagram",generate("Instagram"));
+render("youtube",generate("YouTube"));
+render("business",generate("Business"));
+
+setInterval(()=>location.reload(),21600000);
 </script>
 
 </body>
