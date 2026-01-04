@@ -1,188 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>IdeaSpark ✨</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IdeaSpark</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #020617, #020617);
-      color: white;
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0a0f1f;
+  color: white;
+  text-align: center;
+}
 
-    header {
-      background: #0b3cff;
-      padding: 20px;
-      font-size: 26px;
-      font-weight: bold;
-    }
+header {
+  background: #0d1b3d;
+  padding: 20px;
+}
 
-    .container {
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
-    }
+h1 {
+  color: #4da3ff;
+}
 
-    .card {
-      background: #0f172a;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-    }
+.card {
+  background: #121a33;
+  margin: 15px;
+  padding: 20px;
+  border-radius: 12px;
+}
 
-    button {
-      background: #0b3cff;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 12px;
-      margin: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+button {
+  padding: 12px 18px;
+  margin: 6px;
+  border: none;
+  border-radius: 8px;
+  background: #4da3ff;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    button:hover {
-      opacity: 0.9;
-    }
+button:hover {
+  opacity: 0.85;
+}
 
-    #ideaBox {
-      font-size: 18px;
-      margin-top: 15px;
-    }
+#ideaBox {
+  font-size: 18px;
+  min-height: 60px;
+}
 
-    input {
-      width: 90%;
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      margin-bottom: 10px;
-    }
+input {
+  padding: 10px;
+  width: 80%;
+  max-width: 250px;
+  border-radius: 6px;
+  border: none;
+}
 
-    footer {
-      font-size: 14px;
-      opacity: 0.7;
-      padding: 20px;
-    }
-  </style>
+footer {
+  padding: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+</style>
 </head>
 
 <body>
 
-<header>IdeaSpark ✨</header>
+<header>
+  <h1>IdeaSpark 💡</h1>
+  <p>Instant Content Ideas for Creators</p>
+</header>
 
-<div class="container">
+<div class="card">
+  <button onclick="selectCategory('dance')">Dance</button>
+  <button onclick="selectCategory('comedy')">Comedy</button>
+  <button onclick="selectCategory('quotes')">Quotes</button>
+  <button onclick="selectCategory('school')">School Life</button>
+  <button onclick="selectCategory('motivation')">Motivation</button>
+</div>
 
-  <div class="card">
-    <h3>Stuck on what to post? 👇</h3>
+<div class="card">
+  <div id="ideaBox">Select a category to get ideas</div><br>
+  <button onclick="nextIdea()">Next Idea</button>
+</div>
 
-    <button onclick="getIdea('dance')">Dance</button>
-    <button onclick="getIdea('comedy')">Comedy</button>
-    <button onclick="getIdea('quotes')">Quotes</button>
-    <button onclick="getIdea('school')">School Life</button>
-    <button onclick="getIdea('motivation')">Motivation</button>
+<div class="card">
+  <h3>Get New Ideas</h3>
+  <input type="email" placeholder="Your email"><br><br>
+  <button>Sign Up</button>
+</div>
 
-    <div id="ideaBox">Choose a category to get ideas</div>
-
-    <br>
-    <button onclick="randomIdea()">Next Idea</button>
-  </div>
-
-  <div class="card">
-    <h3>Get More Ideas 🔥</h3>
-    <p>Sign up to receive exclusive content ideas & updates</p>
-
-    <input type="email" placeholder="Enter your email">
-    <br>
-    <button onclick="signup()">Sign Up (FREE)</button>
-    <p style="font-size:13px;">No spam · No passwords · Free forever</p>
-  </div>
-
-  <div class="card">
-    <h3>How This Earns 💰</h3>
-    <p>
-      IdeaSpark is building a real audience.<br><br>
-      • More visitors = more value<br>
-      • Ads & sponsors can be added later (with parent help)<br>
-      • Paid features can unlock in future<br><br>
-      Starting early = winning later 🚀
-    </p>
-  </div>
-
-  <div class="card">
-    👀 Visitors: <span id="visits">0</span>
-  </div>
-
+<div class="card">
+  👀 Visitors: <span id="visits">0</span>
 </div>
 
 <footer>
-  © 2026 IdeaSpark · Built with ❤️
+  IdeaSpark © 2026
 </footer>
 
 <script>
-  const ideas = {
-    dance: [
-      "Dance to a song everyone forgot about",
-      "Teach one simple dance move",
-      "Dance with a friend challenge"
-    ],
-    comedy: [
-      "Act like your phone battery at 1%",
-      "School teachers in real life 😂",
-      "When WiFi disappears"
-    ],
-    quotes: [
-      "One quote that changed your mindset",
-      "Write a quote for students",
-      "Motivation for hard days"
-    ],
-    school: [
-      "Things only students understand",
-      "School lunch review",
-      "Exam week be like 😭"
-    ],
-    motivation: [
-      "Why you should not give up",
-      "Your future self is watching",
-      "Start even if you're scared"
-    ]
-  };
+// Visitor counter
+let visits = localStorage.getItem("ideaspark_visits") || 0;
+visits++;
+localStorage.setItem("ideaspark_visits", visits);
+document.getElementById("visits").innerText = visits;
 
-  let lastCategory = null;
+// Ideas
+let currentIdeas = [];
+let currentIndex = 0;
 
-  function getIdea(category) {
-    lastCategory = category;
-    const list = ideas[category];
-    const idea = list[Math.floor(Math.random() * list.length)];
-    document.getElementById("ideaBox").innerText = idea;
-  }
+const ideas = {
+  dance: [
+    "Dance to a forgotten song",
+    "Slow intro then fast drop",
+    "Hand-only dance",
+    "School uniform dance",
+    "Dance with backpack",
+    "Mirror dance with friend",
+    "Repeat one move only",
+    "Freeze on beat",
+    "Funny walk then dance",
+    "Spin transition dance",
+    "Shoulder-only dance",
+    "Robot dance",
+    "Underwater slow dance",
+    "Late-for-school dance",
+    "Happy freestyle",
+    "Serious face funny dance",
+    "Jump-start dance",
+    "Footwork only",
+    "Beat drop reaction",
+    "Strong ending pose"
+  ],
 
-  function randomIdea() {
-    if (!lastCategory) {
-      document.getElementById("ideaBox").innerText = "Pick a category first 👆";
-      return;
-    }
-    getIdea(lastCategory);
-  }
+  comedy: [
+    "Teacher vs student skit",
+    "Parents when guests come",
+    "Phone dies at 1%",
+    "Slow WiFi reaction",
+    "Exam panic moment",
+    "Food finishes early",
+    "Morning alarm struggle",
+    "Fake confidence",
+    "Teacher says silence",
+    "Last-born problems",
+    "When mum calls you",
+    "Trying not to laugh",
+    "Borrowing money fails",
+    "Friends say ‘I’m coming’",
+    "Results expectations vs reality",
+    "Overthinking at night",
+    "Group work drama",
+    "Embarrassing moment",
+    "Plans get cancelled",
+    "Monday mood"
+  ],
 
-  function signup() {
-    alert("Thanks for signing up! 🚀");
-  }
+  quotes: [
+    "Small steps still matter",
+    "Consistency beats motivation",
+    "Start before ready",
+    "Dreams need action",
+    "Progress is progress",
+    "Your future needs you",
+    "Hard work pays",
+    "Discipline creates freedom",
+    "Focus beats talent",
+    "One day or day one",
+    "Growth takes time",
+    "Believe then work",
+    "Fear means growth",
+    "Stay hungry to learn",
+    "Trust the process",
+    "Effort matters",
+    "Failure teaches",
+    "Patience wins",
+    "Learn daily",
+    "Never stop trying"
+  ],
 
-  // Visitor counter (local, safe)
-  let visits = localStorage.getItem("ideaspark_visits");
-  if (!visits) {
-    visits = 1;
-  } else {
-    visits = Number(visits) + 1;
-  }
-  localStorage.setItem("ideaspark_visits", visits);
-  document.getElementById("visits").innerText = visits;
+  school: [
+    "Study with me video",
+    "Exam prep routine",
+    "Night revision vlog",
+    "School morning routine",
+    "Packing school bag",
+    "Homework motivation",
+    "Focus in class tips",
+    "Study break ideas",
+    "Exam week survival",
+    "Best revision time",
+    "Timetable tips",
+    "Note-taking methods",
+    "Avoid procrastination",
+    "Study music tips",
+    "Group study benefits",
+    "Exam stress tips",
+    "School goals",
+    "Balance school and fun",
+    "Revision checklist",
+    "Subject ranking"
+  ],
+
+  motivation: [
+    "Wake up and try again",
+    "Your effort counts",
+    "Don’t quit today",
+    "One step today",
+    "You are capable",
+    "Progress over perfection",
+    "Discipline builds success",
+    "Hard days count",
+    "Keep learning",
+    "Your story continues",
+    "Work quietly",
+    "Trust yourself",
+    "Push past fear",
+    "Stay consistent",
+    "Future you will thank you",
+    "Small wins matter",
+    "Don’t compare",
+    "Focus on growth",
+    "Believe in yourself",
+    "Start now"
+  ]
+};
+
+function selectCategory(category) {
+  currentIdeas = ideas[category];
+  currentIndex = Math.floor(Math.random() * currentIdeas.length);
+  document.getElementById("ideaBox").innerText = currentIdeas[currentIndex];
+}
+
+function nextIdea() {
+  if (currentIdeas.length === 0) return;
+  currentIndex = (currentIndex + 1) % currentIdeas.length;
+  document.getElementById("ideaBox").innerText = currentIdeas[currentIndex];
+}
 </script>
 
 </body>
-  </html>
+</html>
