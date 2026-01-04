@@ -3,126 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IdeaSpark</title>
+<title>IdeaVault</title>
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(180deg, #050b1f, #020617);
+  background: #0b0f1a;
   color: white;
-  text-align: center;
 }
 header {
-  background: #1447ff;
-  padding: 30px 15px;
+  background: #0d6efd;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
 }
-.container { padding: 20px; }
-.card {
-  background: #0b1636;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 20px;
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px;
 }
 button {
-  background: #1447ff;
-  color: white;
+  background: #0d6efd;
   border: none;
-  padding: 12px 16px;
-  border-radius: 12px;
-  margin: 6px;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 6px;
   cursor: pointer;
 }
-.idea {
-  font-size: 18px;
-  margin: 20px 0;
-  min-height: 40px;
+button:hover {
+  opacity: 0.8;
 }
-.affiliate {
-  background: #020617;
-  border: 2px dashed #1447ff;
+section {
+  display: none;
   padding: 15px;
-  border-radius: 12px;
+}
+.active {
+  display: block;
+}
+.card {
+  background: #111827;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 5px;
+  border: none;
 }
 a {
-  color: #4ea1ff;
+  color: #0d6efd;
   text-decoration: none;
-  font-weight: bold;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>IdeaSpark ✨</h1>
-  <p>100+ Ideas Per Category • Earn via Affiliate Links</p>
-</header>
+<header>IdeaVault – Unlimited Content Ideas</header>
 
-<div class="container">
+<nav>
+  <button onclick="show('home')">Ideas</button>
+  <button onclick="show('signup')">Sign Up</button>
+  <button onclick="show('affiliate')">Affiliate</button>
+</nav>
 
-<div class="card">
-  <button onclick="selectCat('Dance')">Dance</button>
-  <button onclick="selectCat('Comedy')">Comedy</button>
-  <button onclick="selectCat('Quotes')">Quotes</button>
-  <button onclick="selectCat('School')">School Life</button>
-  <button onclick="selectCat('Motivation')">Motivation</button>
+<!-- IDEAS PAGE -->
+<section id="home" class="active">
+  <h3>Content Ideas (200 each)</h3>
 
-  <div class="idea" id="ideaText">Choose a category</div>
-  <button onclick="nextIdea()">Next Idea</button>
-</div>
+  <h4>🔥 TikTok Ideas</h4>
+  <div id="tiktok"></div>
 
-<div class="card affiliate">
-  <h3>💰 Earn With This Tool</h3>
-  <p>Creators use this tool to make viral content.</p>
-  <a href="https://YOUR-AFFILIATE-LINK-HERE" target="_blank"
-     onclick="countClick()">👉 Use Recommended Creator Tool</a>
-  <p id="clicks">Affiliate clicks: 0</p>
-</div>
+  <h4>📸 Instagram Ideas</h4>
+  <div id="instagram"></div>
 
-</div>
+  <h4>🎥 YouTube Ideas</h4>
+  <div id="youtube"></div>
+
+  <h4>💰 Business Ideas</h4>
+  <div id="business"></div>
+
+  <div class="card">
+    🔗 Tools I Use:
+    <br>
+    <a href="https://your-affiliate-link.com" target="_blank">
+      Best Creator Tools (Earns You Money)
+    </a>
+  </div>
+</section>
+
+<!-- SIGN UP -->
+<section id="signup">
+  <h3>Create Account</h3>
+  <input placeholder="Username">
+  <input placeholder="Email">
+  <input placeholder="Password" type="password">
+  <button onclick="alert('Account created!')">Sign Up</button>
+
+  <div class="card">
+    Why sign up?
+    <ul>
+      <li>Unlock all 200+ ideas</li>
+      <li>Weekly updates</li>
+      <li>Exclusive tools</li>
+    </ul>
+  </div>
+</section>
+
+<!-- AFFILIATE SIGN UP -->
+<section id="affiliate">
+  <h3>Affiliate Program</h3>
+
+  <input placeholder="Full Name">
+  <input placeholder="Email">
+  <input placeholder="Payment Method">
+  <button onclick="alert('Affiliate request sent!')">
+    Join Affiliate Program
+  </button>
+
+  <div class="card">
+    💸 Earn Money By:
+    <ul>
+      <li>Sharing your affiliate link</li>
+      <li>Earning commission per click</li>
+      <li>No investment needed</li>
+    </ul>
+  </div>
+</section>
 
 <script>
-let clicks = 0;
-function countClick() {
-  clicks++;
-  document.getElementById("clicks").innerText =
-    "Affiliate clicks: " + clicks;
+function show(id){
+  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-/* 100 IDEAS PER CATEGORY (generated pattern) */
-function generateIdeas(prefix) {
-  let arr = [];
-  for (let i = 1; i <= 100; i++) {
-    arr.push(prefix + " idea " + i);
+function generateIdeas(container, title){
+  let div = document.getElementById(container);
+  for(let i=1;i<=200;i++){
+    let card = document.createElement("div");
+    card.className = "card";
+    card.innerText = title + " Idea #" + i;
+    div.appendChild(card);
   }
-  return arr;
 }
 
-const ideas = {
-  Dance: generateIdeas("Dance"),
-  Comedy: generateIdeas("Comedy"),
-  Quotes: generateIdeas("Quote"),
-  School: generateIdeas("School life"),
-  Motivation: generateIdeas("Motivation")
-};
-
-let cat = "";
-let index = 0;
-
-function selectCat(c) {
-  cat = c;
-  index = 0;
-  document.getElementById("ideaText").innerText = ideas[c][0];
-}
-
-function nextIdea() {
-  if (!cat) return;
-  index++;
-  if (index >= ideas[cat].length) index = 0;
-  document.getElementById("ideaText").innerText = ideas[cat][index];
-}
+generateIdeas("tiktok","TikTok");
+generateIdeas("instagram","Instagram");
+generateIdeas("youtube","YouTube");
+generateIdeas("business","Business");
 </script>
 
 </body>
-</html>
+  </html>
