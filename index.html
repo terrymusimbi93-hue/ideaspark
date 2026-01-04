@@ -1,81 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>IdeaSpark – Content Ideas Platform</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IdeaSpark</title>
 
 <style>
-:root{
-  --blue:#1e90ff;
-  --black:#0b0b0b;
-  --white:#ffffff;
-  --gray:#1c1c1c;
-}
-*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{
-  margin:0;
-  background:var(--black);
-  color:var(--white);
-}
-header{
-  padding:16px;
-  text-align:center;
-  background:linear-gradient(90deg,#000,#001f3f);
-}
-header h1{margin:0;color:var(--blue)}
-header p{margin:5px;font-size:14px;opacity:.8}
-
-.hidden{display:none}
-
-button{
-  background:var(--blue);
-  border:none;
-  padding:12px 18px;
-  border-radius:8px;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
+body{margin:0;font-family:Arial;background:#0b0b0b;color:#fff}
+header{text-align:center;padding:20px;background:#001f3f}
+header h1{margin:0;color:#1e90ff}
+.container{max-width:900px;margin:auto;padding:20px}
+button{background:#1e90ff;color:#fff;border:none;padding:12px 18px;border-radius:8px;font-weight:bold;cursor:pointer}
 button:hover{opacity:.85}
-
-.container{
-  padding:20px;
-  max-width:1000px;
-  margin:auto;
-}
-
-.card{
-  background:var(--gray);
-  padding:15px;
-  border-radius:12px;
-  margin-bottom:15px;
-  cursor:pointer;
-}
-.card:hover{background:#222}
-
-.category{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:15px;
-}
-
-footer{
-  text-align:center;
-  padding:20px;
-  font-size:13px;
-  opacity:.7;
-  border-top:1px solid #222;
-}
-
-input{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border-radius:8px;
-  border:none;
-}
-a{color:var(--blue)}
+.card{background:#1c1c1c;border-radius:12px;padding:20px;margin-top:20px}
+.hidden{display:none}
+.category{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px}
+.footer{text-align:center;font-size:13px;opacity:.7;padding:20px;border-top:1px solid #222}
+input{width:100%;padding:12px;border-radius:8px;border:none;margin:10px 0}
+ul{line-height:1.6}
 </style>
 </head>
 
@@ -86,143 +28,137 @@ a{color:var(--blue)}
   <p>Create • Learn • Inspire</p>
 </header>
 
-<!-- SIGNUP -->
+<!-- SIGN UP -->
 <div class="container" id="signup">
-  <h2>Sign Up to Unlock Ideas</h2>
-  <p>Create an account to access categorized content ideas.</p>
-  <input type="text" placeholder="Username" required>
-  <input type="email" placeholder="Email" required>
-  <button onclick="unlock()">Unlock Ideas</button>
-  <p style="font-size:13px;opacity:.7">By signing up, you agree to our Terms & Privacy Policy.</p>
+  <h2>Sign Up to Unlock AI Ideas</h2>
+  <input placeholder="Username">
+  <input placeholder="Email">
+  <button onclick="unlock()">Continue</button>
+  <p style="font-size:13px;opacity:.7">By continuing, you agree to our legal policies.</p>
 </div>
 
 <!-- MAIN -->
 <div class="container hidden" id="main">
-  <h2>Categories</h2>
+  <h2>Select a Category</h2>
 
   <div class="category">
-    <div class="card" onclick="showIdeas('dance')">💃 Dance</div>
-    <div class="card" onclick="showIdeas('comedy')">😂 Comedy</div>
-    <div class="card" onclick="showIdeas('motivation')">💡 Motivation</div>
-    <div class="card" onclick="showIdeas('innovation')">🚀 Innovation</div>
-    <div class="card" onclick="showIdeas('science')">🔬 Science</div>
+    <button onclick="start('Dance')">💃 Dance</button>
+    <button onclick="start('Comedy')">😂 Comedy</button>
+    <button onclick="start('Motivation')">💡 Motivation</button>
+    <button onclick="start('Innovation')">🚀 Innovation</button>
+    <button onclick="start('Science')">🔬 Science</button>
   </div>
 
-  <div id="ideas"></div>
+  <div id="ideaBox" class="card hidden">
+    <h3 id="title"></h3>
+    <p id="desc"></p>
+    <strong>How To Do It:</strong>
+    <ul id="steps"></ul>
+    <p id="count"></p>
+
+    <button onclick="nextIdea()">Next Idea</button>
+    <button onclick="change()">Change Category</button>
+  </div>
 </div>
 
 <!-- LEGAL -->
 <div class="container">
-  <h3>Legal Information</h3>
-  <p><strong>Terms of Service:</strong> IdeaSpark provides educational content ideas only. We do not guarantee views, followers, or income. Users are responsible for following platform rules.</p>
+<h3>Legal & Protection</h3>
 
-  <p><strong>Privacy Policy:</strong> We collect basic user information for access purposes only. No personal data is sold or shared.</p>
+<p><strong>Copyright & Ownership:</strong><br>
+All content, structure, branding, and ideas on IdeaSpark are protected intellectual property.
+© 2026 IdeaSpark. Owned and operated by <strong>TERRY MUSIMBI</strong>.
+Unauthorized copying, cloning, reselling, or redistribution is strictly prohibited.</p>
 
-  <p><strong>Content Policy:</strong> All ideas are family-friendly, non-sexual, and suitable for all ages.</p>
+<p><strong>Trademark & Name Protection:</strong><br>
+The name “IdeaSpark” and its design may not be used, copied, or imitated in any form that causes confusion or misrepresentation.</p>
 
-  <p><strong>Copyright:</strong> © 2026 IdeaSpark. All ideas are original or curated. Website content may not be copied or resold.</p>
+<p><strong>Anti-Hacking & Abuse Policy:</strong><br>
+Any attempt to hack, scrape, reverse-engineer, exploit vulnerabilities, or use automated bots is forbidden and may result in account termination and legal action.</p>
+
+<p><strong>Content Disclaimer:</strong><br>
+Ideas are provided for educational and creative inspiration only. We do not guarantee views, followers, income, or platform success.</p>
+
+<p><strong>User Responsibility:</strong><br>
+Users are responsible for complying with the rules of platforms such as TikTok, YouTube, and Instagram.</p>
+
+<p><strong>Privacy Policy:</strong><br>
+We collect minimal data (username and email) solely to provide access. No personal data is sold or shared.</p>
+
+<p><strong>Age-Safe Content:</strong><br>
+IdeaSpark provides family-friendly, non-sexual, non-harmful content suitable for all ages.</p>
 </div>
 
-<footer>
-  IdeaSpark © 2026 <br>
-  Created & Owned by <strong>TERRY MUSIMBI</strong>
-</footer>
+<div class="footer">
+IdeaSpark © 2026<br>
+Created & Owned by <strong>TERRY MUSIMBI</strong>
+</div>
 
 <script>
-function unlock(){
-  document.getElementById("signup").classList.add("hidden");
-  document.getElementById("main").classList.remove("hidden");
-}
+let currentCategory="";
+let ideaIndex=0;
 
-const data={
-dance:[
-{
-title:"Mirror Dance Challenge",
-desc:"A simple dance where movements look like a mirror reflection.",
-steps:[
-"Stand facing the camera",
-"Record the dance twice",
-"Flip one clip horizontally",
-"Sync both clips",
-"Use soft trending music"
-]
-},
-{
-title:"One Move Many Styles",
-desc:"Repeat one move with different music styles.",
-steps:[
-"Choose one simple move",
-"Record multiple short clips",
-"Change music each time",
-"Combine clips",
-"Add caption text"
-]
-}
-],
-comedy:[
-{
-title:"Expectation vs Reality",
-desc:"Show the funny difference between plans and real life.",
-steps:[
-"Record expectation clip",
-"Record reality clip",
-"Add captions",
-"Use light humor sound"
-]
-}
-],
-motivation:[
-{
-title:"Start Small Message",
-desc:"Encourage people to begin without waiting.",
-steps:[
-"Record yourself working",
-"Add text overlays",
-"Use calm music",
-"Keep video short"
-]
-}
-],
-innovation:[
-{
-title:"Solve a Daily Problem",
-desc:"Explain a small idea that improves daily life.",
-steps:[
-"Identify a common problem",
-"Explain your idea simply",
-"Show example",
-"Ask viewers thoughts"
-]
-}
-],
-science:[
-{
-title:"Science Fact in 15 Seconds",
-desc:"Teach one simple science fact.",
-steps:[
-"Choose one fact",
-"Explain simply",
-"Use drawings or text",
-"Keep under 15 seconds"
-]
-}
-]
+const hooks=[
+"Create a short video showing",
+"Record a simple clip where you",
+"Make a beginner-friendly video that",
+"Create an easy-to-follow idea where you"
+];
+
+const actions={
+Dance:["do a simple repeatable move","change speed with music","mirror your movements","freeze on beat drops"],
+Comedy:["show expectations vs reality","react to a funny situation","use relatable humor","act out daily problems"],
+Motivation:["show small progress","encourage starting small","share a positive reminder","highlight consistency"],
+Innovation:["solve a daily problem","improve a common habit","explain a simple idea","show a smart shortcut"],
+Science:["explain a simple fact","answer a common question","show how something works","teach one concept simply"]
 };
 
-function showIdeas(cat){
-  let html=`<h3>${cat.toUpperCase()} IDEAS</h3>`;
-  data[cat].forEach(i=>{
-    html+=`
-    <div class="card">
-      <h4>${i.title}</h4>
-      <p>${i.desc}</p>
-      <strong>How To Do It:</strong>
-      <ul>${i.steps.map(s=>`<li>${s}</li>`).join("")}</ul>
-    </div>`;
-  });
-  document.getElementById("ideas").innerHTML=html;
+function unlock(){
+  signup.classList.add("hidden");
+  main.classList.remove("hidden");
+}
+
+function start(cat){
+  currentCategory=cat;
+  ideaIndex=0;
+  showIdea();
+}
+
+function generateIdea(){
+  let hook=hooks[Math.floor(Math.random()*hooks.length)];
+  let action=actions[currentCategory][Math.floor(Math.random()*actions[currentCategory].length)];
+
+  return {
+    title:`${currentCategory} Idea`,
+    desc:`${hook} ${action}.`,
+    steps:[
+      "Choose a simple setup",
+      "Record in good lighting",
+      "Keep it under 30 seconds",
+      "Add clear text or captions",
+      "Post consistently"
+    ]
+  };
+}
+
+function showIdea(){
+  const idea=generateIdea();
+  ideaBox.classList.remove("hidden");
+  title.innerText=idea.title;
+  desc.innerText=idea.desc;
+  steps.innerHTML=idea.steps.map(s=>`<li>${s}</li>`).join("");
+  count.innerText=`Idea ${ideaIndex+1} of 200`;
+}
+
+function nextIdea(){
+  if(ideaIndex<199) ideaIndex++;
+  showIdea();
+}
+
+function change(){
+  ideaBox.classList.add("hidden");
 }
 </script>
 
 </body>
-  </html>
+</html>
