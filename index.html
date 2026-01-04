@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IdeaSpark</title>
 
+<!-- GOOGLE ADS PLACEHOLDER (activate after AdSense approval) -->
+<!--
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+-->
+
 <style>
 body {
   margin: 0;
@@ -53,10 +58,6 @@ header p {
   cursor: pointer;
 }
 
-.buttons button:hover {
-  opacity: 0.85;
-}
-
 .idea {
   font-size: 18px;
   margin: 25px 0;
@@ -71,6 +72,17 @@ header p {
   font-size: 16px;
   color: white;
   cursor: pointer;
+}
+
+/* AD BOX */
+.ad-box {
+  background: #020617;
+  border: 2px dashed #1447ff;
+  border-radius: 14px;
+  padding: 20px;
+  margin: 20px 0;
+  font-size: 14px;
+  opacity: 0.85;
 }
 
 footer {
@@ -89,6 +101,11 @@ footer {
 
 <div class="container">
 
+  <!-- AD TOP -->
+  <div class="ad-box">
+    🔵 Ad Space (Google AdSense)
+  </div>
+
   <!-- IDEAS -->
   <div class="card">
     <div class="buttons">
@@ -106,25 +123,35 @@ footer {
     <button class="next-btn" onclick="nextIdea()">Next Idea</button>
   </div>
 
+  <!-- AD MIDDLE -->
+  <div class="ad-box">
+    🔵 Ad Space (Banner / Video)
+  </div>
+
   <!-- EARNINGS -->
   <div class="card">
-    <h3>💰 How You Earn</h3>
+    <h3>💰 How This Site Earns</h3>
     <p>
-      • Share this website on TikTok & bio<br>
-      • Add affiliate links later (editing apps, tools)<br>
-      • Enable ads when traffic grows<br>
-      • Offer premium ideas in the future
+      • Ads show when visitors use the site<br>
+      • You earn per view & click<br>
+      • More traffic = more money<br>
+      • TikTok traffic works best
     </p>
   </div>
 
   <!-- AFFILIATE -->
   <div class="card">
-    <h3>🤝 Affiliate Opportunity</h3>
+    <h3>🤝 Affiliate Income</h3>
     <p>
-      Creators can promote tools they use.<br>
-      You earn commission when users click links.
+      • Promote editing apps & tools<br>
+      • Earn commission per click<br>
+      • Links will be added later
     </p>
-    <p><i>(Affiliate links will be added later)</i></p>
+  </div>
+
+  <!-- AD BOTTOM -->
+  <div class="ad-box">
+    🔵 Ad Space (Footer)
   </div>
 
   <footer>
