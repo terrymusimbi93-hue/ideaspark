@@ -2,201 +2,340 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>IdeaSpark Pro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IdeaVault</title>
 
 <style>
+:root{
+ --blue:#4da3ff;
+ --bg:#050912;
+ --card:rgba(255,255,255,.08);
+ --border:rgba(255,255,255,.15);
+}
+
+*{box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0b0f1a;
-  color:white;
+ margin:0;
+ font-family:'Segoe UI',Arial,sans-serif;
+ background:radial-gradient(circle at top,#0d1b3d,#050912);
+ color:#fff;
+ overflow-x:hidden;
 }
+
+/* LOADER */
+#loader{
+ position:fixed;
+ inset:0;
+ background:#050912;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ z-index:999;
+ animation:fadeOut 1s ease 2.3s forwards;
+}
+#loader h1{
+ color:var(--blue);
+ letter-spacing:3px;
+ animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+ 0%,100%{opacity:1}
+ 50%{opacity:.4}
+}
+@keyframes fadeOut{
+ to{opacity:0;visibility:hidden}
+}
+
+/* HEADER */
 header{
-  background:#0d6efd;
-  padding:15px;
-  text-align:center;
-  font-size:22px;
-  font-weight:bold;
+ position:sticky;
+ top:0;
+ backdrop-filter:blur(16px);
+ background:rgba(10,15,31,.8);
+ border-bottom:1px solid var(--border);
+ padding:18px;
+ text-align:center;
+ z-index:10;
+ animation:slideDown .8s ease;
 }
+@keyframes slideDown{
+ from{transform:translateY(-40px);opacity:0}
+ to{transform:translateY(0);opacity:1}
+}
+
+.logo{
+ font-size:28px;
+ color:var(--blue);
+ letter-spacing:2px;
+ animation:logoGlow 2.5s infinite;
+}
+@keyframes logoGlow{
+ 0%,100%{text-shadow:0 0 10px rgba(77,163,255,.4)}
+ 50%{text-shadow:0 0 30px rgba(77,163,255,.9)}
+}
+
+/* NAV */
 nav{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:8px;
-  margin:10px;
+ margin-top:12px;
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:10px;
 }
-button{
-  background:#0d6efd;
-  border:none;
-  padding:10px 14px;
-  color:white;
-  border-radius:6px;
-  cursor:pointer;
+nav button{
+ background:transparent;
+ border:1px solid var(--border);
+ color:#fff;
+ padding:10px 18px;
+ border-radius:30px;
+ cursor:pointer;
+ transition:.35s;
+ position:relative;
+ overflow:hidden;
 }
-button:hover{opacity:.85}
-section{display:none;padding:15px}
-.active{display:block}
+nav button::after{
+ content:'';
+ position:absolute;
+ inset:0;
+ background:radial-gradient(circle,rgba(255,255,255,.4),transparent 60%);
+ opacity:0;
+ transition:.4s;
+}
+nav button:hover::after{opacity:1}
+nav button:hover{
+ background:var(--blue);
+ color:#000;
+ box-shadow:0 0 25px rgba(77,163,255,.6);
+ transform:translateY(-2px);
+}
+
+/* SECTIONS */
+section{
+ display:none;
+ padding:40px 20px;
+ max-width:1100px;
+ margin:auto;
+ animation:fadeSlide .6s ease;
+}
+section.active{display:block}
+@keyframes fadeSlide{
+ from{opacity:0;transform:translateY(30px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+/* CARDS */
 .card{
-  background:#111827;
-  padding:12px;
-  margin:8px 0;
-  border-radius:8px;
+ background:var(--card);
+ border:1px solid var(--border);
+ backdrop-filter:blur(18px);
+ padding:30px;
+ border-radius:24px;
+ margin-bottom:30px;
+ box-shadow:0 30px 60px rgba(0,0,0,.4);
+ transition:.4s;
 }
-input{
-  width:100%;
-  padding:10px;
-  margin:6px 0;
-  border-radius:5px;
-  border:none;
+.card:hover{
+ transform:translateY(-8px) scale(1.02);
+ box-shadow:0 45px 90px rgba(77,163,255,.25);
 }
-.hidden{display:none}
-a{color:#0d6efd;text-decoration:none}
-.trending{border-left:4px solid #0d6efd}
+.card h2,.card h3{color:var(--blue);margin-top:0}
+
+/* LOCK */
+.lock{
+ opacity:.35;
+ filter:blur(2px);
+ pointer-events:none;
+ transition:.7s;
+}
+
+/* INPUTS */
+input,select{
+ width:100%;
+ padding:14px;
+ margin:10px 0;
+ border-radius:14px;
+ border:1px solid var(--border);
+ background:rgba(0,0,0,.4);
+ color:#fff;
+ outline:none;
+}
+
+/* MAIN BUTTON */
+button.main{
+ width:100%;
+ padding:16px;
+ border-radius:40px;
+ border:none;
+ background:linear-gradient(135deg,#4da3ff,#6f7cff);
+ color:#000;
+ font-weight:bold;
+ font-size:16px;
+ cursor:pointer;
+ transition:.4s;
+ position:relative;
+ overflow:hidden;
+}
+button.main:hover{
+ transform:translateY(-3px);
+ box-shadow:0 15px 40px rgba(77,163,255,.6);
+}
+
+/* FOOTER */
+footer{
+ text-align:center;
+ font-size:12px;
+ color:#aaa;
+ padding:30px;
+ border-top:1px solid var(--border);
+}
+
+/* LIST */
+ul{padding-left:18px}
+li{margin:8px 0}
 </style>
 </head>
 
 <body>
 
-<header>IdeaVault – 200+ Trending Ideas Daily</header>
+<div id="loader">
+  <h1>IDEASPARK</h1>
+  <p>Loading ideas...</p>
+</div>
 
+<header>
+<div class="logo">IdeaSpark Pro</div>
+<p>Animated • App-Style • Premium</p>
 <nav>
-  <button onclick="show('home')">Ideas</button>
-  <button onclick="show('signup')">Sign Up</button>
-  <button onclick="show('login')">Login</button>
-  <button onclick="logout()">Logout</button>
-  <button onclick="show('affiliate')">Affiliate</button>
+<button onclick="go('home')">Home</button>
+<button onclick="go('ideas')">Ideas</button>
+<button onclick="go('trends')">Trends</button>
+<button onclick="go('affiliate')">Affiliate</button>
+<button onclick="go('earn')">Earnings</button>
+<button onclick="go('login')">Login</button>
 </nav>
+</header>
 
-<!-- IDEAS -->
-<section id="home">
-  <h3>🔥 Trending Content Ideas</h3>
-
-  <div id="lockedMsg" class="card">
-    🔒 Login to unlock all ideas
-  </div>
-
-  <div id="ideas" class="hidden">
-    <h4>TikTok</h4><div id="tiktok"></div>
-    <h4>Instagram</h4><div id="instagram"></div>
-    <h4>YouTube</h4><div id="youtube"></div>
-    <h4>Business</h4><div id="business"></div>
-
-    <div class="card">
-      🔗 Recommended Tool  
-      <br>
-      <a href="https://your-affiliate-link.com" target="_blank">
-        Best Creator Tools (Earns You Money)
-      </a>
-    </div>
-  </div>
+<section id="home" class="active">
+<div class="card">
+<h2>Welcome 👋</h2>
+<p><b id="views">0</b> creators joined.</p>
+<p>Viral ideas • Trends • Earnings — all in one place.</p>
+</div>
 </section>
 
-<!-- SIGN UP -->
-<section id="signup" class="active">
-  <h3>Create Account</h3>
-  <input id="suUser" placeholder="Username">
-  <input id="suEmail" placeholder="Email">
-  <input id="suPass" type="password" placeholder="Password">
-  <button onclick="signup()">Sign Up</button>
+<section id="ideas">
+<div class="card">
+<h3>Select Platform</h3>
+<select id="cat" onchange="loadIdeas()">
+<option>TikTok</option>
+<option>Instagram</option>
+<option>YouTube</option>
+</select>
+<ul id="free"></ul>
+</div>
+
+<div class="card lock" id="premium">
+<h3>🔒 Premium Ideas</h3>
+<ul id="paid"></ul>
+</div>
 </section>
 
-<!-- LOGIN -->
-<section id="login">
-  <h3>Login</h3>
-  <input id="liUser" placeholder="Username">
-  <input id="liPass" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
+<section id="trends">
+<div class="card">
+<h3>🔥 Trending Now</h3>
+<ul>
+<li>Fast-cut edits</li>
+<li>Storytime captions</li>
+<li>Dance remix</li>
+<li>Motivation voice-over</li>
+<li>Green screen reactions</li>
+</ul>
+</div>
 </section>
 
-<!-- AFFILIATE -->
 <section id="affiliate">
-  <h3>Affiliate Program</h3>
-  <input placeholder="Full Name">
-  <input placeholder="Email">
-  <input placeholder="Payment Method">
-  <button onclick="alert('Affiliate request sent!')">Join Affiliate</button>
-
-  <div class="card">
-    💰 Earn commission by sharing your link  
-    📈 Paid per click or signup
-  </div>
+<div class="card">
+<h3>🤝 Affiliate Program</h3>
+<p>Your link:</p>
+<input id="refLink" readonly>
+</div>
 </section>
+
+<section id="earn">
+<div class="card">
+<h3>💰 Earnings</h3>
+<p>Referrals: <b id="refs">0</b></p>
+<p>Earnings (demo): <b>$<span id="money">0.00</span></b></p>
+</div>
+</section>
+
+<section id="login">
+<div class="card">
+<h3>Login / Signup</h3>
+<input id="pass" type="password" placeholder="Password">
+<button class="main" onclick="login()">Unlock Premium</button>
+<p>Demo password: <b>1234</b></p>
+</div>
+</section>
+
+<footer>
+© 2026 IdeaSpark Pro • Full Motion Edition
+</footer>
 
 <script>
-function show(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+let logged=false, earnings=0, refs=0;
+
+const ideas={
+TikTok:[...Array(50)].map((_,i)=>"TikTok viral idea "+(i+1)),
+Instagram:[...Array(50)].map((_,i)=>"Instagram reel idea "+(i+1)),
+YouTube:[...Array(50)].map((_,i)=>"YouTube Shorts idea "+(i+1))
+};
+
+function go(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
 
-/* LOGIN SYSTEM */
-function signup(){
-  localStorage.setItem("user", suUser.value);
-  localStorage.setItem("pass", suPass.value);
-  alert("Account created. Please login.");
-  show("login");
+function loadIdeas(){
+let c=cat.value;
+free.innerHTML=ideas[c].slice(0,10).map(i=>"<li>"+i+"</li>").join("");
+paid.innerHTML=ideas[c].slice(10).map(i=>"<li>"+i+"</li>").join("");
+}
+
+function animate(el,to){
+let n=0,step=to/30;
+let i=setInterval(()=>{
+ n+=step;
+ if(n>=to){n=to;clearInterval(i)}
+ el.innerText=Math.floor(n);
+},20);
 }
 
 function login(){
-  if(liUser.value===localStorage.user && liPass.value===localStorage.pass){
-    localStorage.setItem("logged","yes");
-    unlock();
-    show("home");
-  } else {
-    alert("Wrong login details");
-  }
+if(pass.value==="1234"){
+logged=true;
+premium.classList.remove("lock");
+premium.style.animation="fadeSlide .6s ease";
+alert("Premium Unlocked 🎉");
+go("ideas");
+}
 }
 
-function logout(){
-  localStorage.removeItem("logged");
-  location.reload();
-}
+(function(){
+let v=+localStorage.views||0;
+localStorage.views=++v;
+animate(views,v);
 
-function unlock(){
-  lockedMsg.style.display="none";
-  ideas.classList.remove("hidden");
-}
-
-if(localStorage.logged==="yes"){unlock();}
-
-/* TRENDING IDEA SYSTEM */
-const seed = new Date().toDateString().split("").reduce((a,b)=>a+b.charCodeAt(0),0);
-
-function shuffle(arr){
-  let s=seed;
-  for(let i=arr.length-1;i>0;i--){
-    s=(s*9301+49297)%233280;
-    let j=s%(i+1);
-    [arr[i],arr[j]]=[arr[j],arr[i]];
-  }
-  return arr;
-}
-
-function generate(title){
-  let arr=[];
-  for(let i=1;i<=200;i++){
-    arr.push(title+" Idea #"+i);
-  }
-  return shuffle(arr);
-}
-
-function render(id,ideas){
-  let d=document.getElementById(id);
-  ideas.forEach((t,i)=>{
-    let c=document.createElement("div");
-    c.className="card"+(i<5?" trending":"");
-    c.innerHTML=i<5?"🔥 <b>TRENDING:</b> "+t:t;
-    d.appendChild(c);
-  });
-}
-
-render("tiktok",generate("TikTok"));
-render("instagram",generate("Instagram"));
-render("youtube",generate("YouTube"));
-render("business",generate("Business"));
-
-setInterval(()=>location.reload(),21600000);
+let ref=new URLSearchParams(location.search).get("ref");
+if(ref){refs++;earnings+=1.5}
+document.getElementById("refs").innerText=refs;
+money.innerText=earnings.toFixed(2);
+refLink.value=location.origin+location.pathname+"?ref=1234";
+loadIdeas();
+})();
 </script>
 
 </body>
-</html>
+  </html>
